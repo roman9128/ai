@@ -1,0 +1,47 @@
+package rt.nlp;
+
+import opennlp.tools.doccat.DoccatModel;
+import opennlp.tools.doccat.DocumentCategorizerME;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
+
+public class NLPModelFinder {
+
+    private final Map<String, DocumentCategorizerME> models = new HashMap<>();
+
+    public void findModels() throws IOException {
+
+        String modelsDirString = "models";
+        String modelExtension = "model";
+        Path modelsDir = Paths.get(modelsDirString);
+
+        if (!Files.exists(modelsDir) || !Files.isDirectory(modelsDir)) {
+            System.out.println("Указанный путь не является директорией или не существует");
+            return;
+        }
+
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(modelsDir, "*.{" + modelExtension + "}")) {  // используем glob pattern
+            for (Path path : stream) {
+                File modelFile = path.toFile();
+                String fileName = modelFile.getName();
+                String label = fileName.substring(0, fileName.length() - modelExtension.length() - 1); // удаляю расширение .model
+                DoccatModel model = new DoccatModel(modelFile);
+                models.put(label, new DocumentCategorizerME(model));
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public Map<String, DocumentCategorizerME> getModels() {
+        return models;
+    }
+}
