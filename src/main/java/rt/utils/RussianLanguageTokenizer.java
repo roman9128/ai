@@ -8,14 +8,14 @@ import java.util.*;
 public class RussianLanguageTokenizer {
 
     private static final SnowballStemmer stemmer = new SnowballStemmer(SnowballStemmer.ALGORITHM.RUSSIAN);
-    private static final Set<String> stopWords = WordsLoader.loadWordsSet("dictionaries/stop.txt");
-    private static final Set<String> toRemoveStrings = WordsLoader.loadWordsSet("dictionaries/remove.txt");
+    private static final Set<String> stopWords = WordsLoader.loadWordsSet("nlp/dictionaries/stop.txt");
+    private static final Set<String> toRemoveStrings = WordsLoader.loadWordsSet("nlp/dictionaries/remove.txt");
 
     public static String[] tokenize(String text) {
         text = text
                 .toLowerCase()
                 .replaceAll("ё", "е")
-                .replaceAll("—","-")
+                .replaceAll("—", "-")
                 .replaceAll("[^\\p{L}\\s-]", "");
         String[] words = text.split("[\\s-]+");
         words = Arrays.stream(words)
@@ -35,7 +35,9 @@ public class RussianLanguageTokenizer {
                 wordsToChange[i] = meanings.getFirst().getLemma().toString();
             }
         }
-        return Arrays.stream(wordsToChange).filter(Objects::nonNull).toArray(String[]::new);
+        return Arrays.stream(wordsToChange)
+                .filter(w -> !isStopWord(w))
+                .toArray(String[]::new);
     }
 
     private static boolean toRemove(String word) {

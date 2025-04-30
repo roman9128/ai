@@ -17,9 +17,9 @@ public class NLPModelFinder {
 
     private final Map<String, DocumentCategorizerME> models = new HashMap<>();
 
-    public void findModels() throws IOException {
+    private void findModels() throws IOException {
 
-        String modelsDirString = "models";
+        String modelsDirString = "nlp/models";
         String modelExtension = "model";
         Path modelsDir = Paths.get(modelsDirString);
 
@@ -28,7 +28,7 @@ public class NLPModelFinder {
             return;
         }
 
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(modelsDir, "*.{" + modelExtension + "}")) {  // используем glob pattern
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(modelsDir, "*.{" + modelExtension + "}")) {
             for (Path path : stream) {
                 File modelFile = path.toFile();
                 String fileName = modelFile.getName();
@@ -41,7 +41,8 @@ public class NLPModelFinder {
         }
     }
 
-    public Map<String, DocumentCategorizerME> getModels() {
+    public Map<String, DocumentCategorizerME> getModels() throws IOException {
+        findModels();
         return models;
     }
 }

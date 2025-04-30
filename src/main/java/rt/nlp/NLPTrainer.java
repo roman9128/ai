@@ -10,7 +10,7 @@ public class NLPTrainer {
 
     public void train(String label) throws IOException {
 
-        File trainingDataFile = new File("training/" + label + ".txt");
+        File trainingDataFile = new File("nlp/training/" + label + ".txt");
         InputStreamFactory inputStreamFactory = new MarkableFileInputStreamFactory(trainingDataFile);
         ObjectStream<String> lineStream = new PlainTextByLineStream(inputStreamFactory, StandardCharsets.UTF_8);
         ObjectStream<DocumentSample> sampleStream = new DocumentSampleStream(lineStream);
@@ -21,6 +21,6 @@ public class NLPTrainer {
         params.put(TrainingParameters.ALGORITHM_PARAM, "MAXENT");
         DoccatModel model = DocumentCategorizerME.train("ru", sampleStream, params, new DoccatFactory());
 
-        model.serialize(new File("models/" + label + ".model"));
+        model.serialize(new File("nlp/models/" + label + ".model"));
     }
 }
