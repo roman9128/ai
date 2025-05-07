@@ -13,11 +13,11 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NLPModelFinder {
+class NLPModelFinder {
 
     private final Map<String, DocumentCategorizerME> models = new HashMap<>();
 
-    private void findModels() throws IOException {
+    void findModels() throws IOException {
 
         String modelsDirString = "nlp/models";
         String modelExtension = "model";
@@ -41,8 +41,7 @@ public class NLPModelFinder {
         }
     }
 
-    public Map<String, DocumentCategorizerME> getModels() throws IOException {
-        findModels();
+    Map<String, DocumentCategorizerME> getModels() throws IOException {
         return models;
     }
 }

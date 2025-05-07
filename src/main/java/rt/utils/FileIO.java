@@ -4,13 +4,13 @@ import java.io.*;
 
 public class FileIO {
 
-    public static void prepareFileForTokenization(String fileName) {
+    public static void prepareFile(String fileName, String separator) {
         try {
             String text = readTextFromFile(fileName);
-            String[] textArr = text.split(System.lineSeparator());
+            String[] textArr = text.split(separator);
             for (String s : textArr) {
                 String[] tokens = RussianLanguageTokenizer.tokenize(s);
-                writeTextToFile(String.join(" ", tokens) + System.lineSeparator(), "training/new_" + fileName);
+                writeTextToFile(String.join(" ", tokens) + System.lineSeparator(), "nlp/training/new_" + fileName);
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());

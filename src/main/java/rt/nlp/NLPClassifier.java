@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class NLPClassifier {
+class NLPClassifier {
 
     private Map<String, DocumentCategorizerME> models;
 
-    public void setModels(Map<String, DocumentCategorizerME> models) {
+    void setModels(Map<String, DocumentCategorizerME> models) {
         this.models = models;
     }
 
@@ -20,7 +20,7 @@ public class NLPClassifier {
      * @param tokens токенизированный текст для анализа
      * @return HashMap категория-вероятность
      */
-    public Map<String, Double> classify(String[] tokens) {
+    Map<String, Double> classify(String[] tokens) {
         Map<String, Double> result = new HashMap<>();
 
         for (Map.Entry<String, DocumentCategorizerME> entry : models.entrySet()) {
