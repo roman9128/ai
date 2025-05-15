@@ -24,8 +24,7 @@ class NLPModelFinder {
         Path modelsDir = Paths.get(modelsDirString);
 
         if (!Files.exists(modelsDir) || !Files.isDirectory(modelsDir)) {
-            System.out.println("Указанный путь не является директорией или не существует");
-            return;
+            throw new RuntimeException("Указанный путь не является директорией или не существует");
         }
 
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(modelsDir, "*.{" + modelExtension + "}")) {

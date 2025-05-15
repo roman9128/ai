@@ -16,8 +16,8 @@ public class NLPTrainer {
         ObjectStream<DocumentSample> sampleStream = new DocumentSampleStream(lineStream);
 
         TrainingParameters params = TrainingParameters.defaultParams();
-        params.put(TrainingParameters.ITERATIONS_PARAM, 200);
-        params.put(TrainingParameters.CUTOFF_PARAM, 5);
+        params.put(TrainingParameters.ITERATIONS_PARAM, 400);
+        params.put(TrainingParameters.CUTOFF_PARAM, 2);
         params.put(TrainingParameters.ALGORITHM_PARAM, "MAXENT");
         DoccatModel model = DocumentCategorizerME.train("ru", sampleStream, params, new DoccatFactory());
 
