@@ -4,7 +4,6 @@ import opennlp.tools.doccat.DoccatModel;
 import opennlp.tools.doccat.DocumentCategorizerME;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -17,7 +16,7 @@ class NLPModelFinder {
 
     private final Map<String, DocumentCategorizerME> models = new HashMap<>();
 
-    void findModels() throws IOException {
+    void findModels() {
 
         String modelsDirString = "nlp/models";
         String modelExtension = "model";
@@ -35,12 +34,12 @@ class NLPModelFinder {
                 DoccatModel model = new DoccatModel(modelFile);
                 models.put(label, new DocumentCategorizerME(model));
             }
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    Map<String, DocumentCategorizerME> getModels() throws IOException {
+    Map<String, DocumentCategorizerME> getModels() {
         return models;
     }
 }

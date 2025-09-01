@@ -1,14 +1,9 @@
 package rt;
 
 import rt.nlp.NLPService;
-import rt.nlp.NLPTrainer;
-import rt.utils.FileIO;
-import rt.utils.RussianLanguageTokenizer;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Map;
-import java.util.Random;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -23,40 +18,17 @@ public class Main {
         Map<String, Double> result2 = service.classify(text2);
         System.out.println(result1);
         System.out.println(result2);
-
-
-//        String text = FileIO.readTextFromFile("jur.txt");
-//        String[] lines = text.split(System.lineSeparator());
-
-//        Random random = new Random();
-//        int count = 2185;
-//        String[] copy = lines.clone();
-//        for (int i = copy.length - 1; i > 0; i--) {
-//            int index = random.nextInt(i + 1);
-//            String temp = copy[index];
-//            copy[index] = copy[i];
-//            copy[i] = temp;
-//        }
-//        String[] res = new String[count];
-//        System.arraycopy(copy, 0, res, 0, count);
-//        lines = Arrays.stream(res).sorted().toArray(String[]::new);
-//        for (String string : lines) {
-//            FileIO.writeTextToFile("1_" + string + System.lineSeparator(), "juris.txt");
-//        }
     }
 }
 
 /**
- * categories_translator =
- * {'climate': 0,
- * 'conflicts': 1, done
+ * 'climate': 0,
  * 'culture': 2,
  * 'economy': 3,
  * 'gloss': 4,
  * 'health': 5,
- * 'politics': 6, done
  * 'science': 7,
  * 'society': 8,
  * 'sports': 9,
- * 'travel': 10}
+ * 'travel': 10
  */

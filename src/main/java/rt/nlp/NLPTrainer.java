@@ -6,9 +6,9 @@ import opennlp.tools.util.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-public class NLPTrainer {
+class NLPTrainer {
 
-    public void train(String label) throws IOException {
+    void train(String label) throws IOException {
 
         File trainingDataFile = new File("nlp/training/" + label + ".txt");
         InputStreamFactory inputStreamFactory = new MarkableFileInputStreamFactory(trainingDataFile);
