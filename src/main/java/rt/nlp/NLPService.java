@@ -1,7 +1,5 @@
 package rt.nlp;
 
-import rt.utils.RussianLanguageTokenizer;
-
 import java.io.IOException;
 import java.util.Map;
 

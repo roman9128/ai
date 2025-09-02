@@ -1,17 +1,18 @@
-package rt.utils;
+package rt.nlp;
 
 import com.github.demidko.aot.WordformMeaning;
 import opennlp.tools.stemmer.snowball.SnowballStemmer;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Set;
 
-public class RussianLanguageTokenizer {
+class RussianLanguageTokenizer {
 
     private static final SnowballStemmer stemmer = new SnowballStemmer(SnowballStemmer.ALGORITHM.RUSSIAN);
     private static final Set<String> stopWords = WordsLoader.loadWordsSet("nlp/dictionaries/stop.txt");
     private static final Set<String> toRemoveStrings = WordsLoader.loadWordsSet("nlp/dictionaries/remove.txt");
 
-    public static String[] tokenize(String text) {
+    static String[] tokenize(String text) {
         text = text
                 .toLowerCase()
                 .replaceAll("ё", "е")
